@@ -42,9 +42,9 @@ class VCLOpsworks(object):
                 }
         log.info("hosts {}".format(self.hosts))
         self.create_servers_file(self.hosts, self.node_type)
-	#self.create_shell_script(self.hosts)
-        if self.playbook:
-            self.configure_hosts(self.hosts, self.playbook)
+
+        #if self.playbook:
+        #    self.configure_hosts(self.hosts, self.playbook)
 
 
     def __wait_for_request_ready(self, request_id):
