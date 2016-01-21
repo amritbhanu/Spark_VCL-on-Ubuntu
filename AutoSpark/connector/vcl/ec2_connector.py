@@ -223,7 +223,14 @@ def main(argv):
     # Creating the cluster
     # Running python command
     os.chdir(vcl_LAUNCHER_DIR)
-    cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \"aagrawa8@NCSU\""
+    user=''
+    with open("user.txt", 'r') as f:
+    	    for doc in f.readlines():
+		try:
+		    user=doc.strip()
+		except:
+		    pass    
+    cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
     command = cmd_format.format(count)
     execute(command)
     os.chdir(Driver_DIR)

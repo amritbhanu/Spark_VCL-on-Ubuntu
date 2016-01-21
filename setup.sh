@@ -1,5 +1,6 @@
 #from the source directory.
 python setup.py install
+echo $1 > user.txt
 
 sudo apt-get update -y
 sudo apt-get install git
