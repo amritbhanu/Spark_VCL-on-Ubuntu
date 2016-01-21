@@ -43,7 +43,7 @@ def request(config):
 @click.argument("url")
 @click.argument("username")
 @click.password_option(help="password for VCL site")
-def add(config, image_id, start, length, count,node_type url, username, password,playbook,
+def add(config, image_id, start, length, count,node_type, url, username, password,playbook,
         role):
     make_config(config, url, username, password)
     if start is None:

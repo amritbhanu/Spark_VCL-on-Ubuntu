@@ -44,7 +44,7 @@ class VCLOpsworks(object):
         self.create_servers_file(self.hosts, self.node_type)
 	#self.create_shell_script(self.hosts)
         if self.playbook:
-            val=self.configure_hosts(self.hosts, self.playbook)
+            self.configure_hosts(self.hosts, self.playbook)
 
 
     def __wait_for_request_ready(self, request_id):
@@ -112,62 +112,4 @@ class VCLOpsworks(object):
 			slave_file.write(cluster_info.keys()[slave] +"\n")
 
 		slave_file.close()
-	
 
-    def create_inventory_file(self, cluster_info):
-
-	python_file_path = os.path.dirname(os.getcwd())
-
-	master_file_path = os.path.join(python_file_path +
-		                            "/VCL/AutoSpark/Ansible/playbooks/master_inventory")
-
-	master_file = open(master_file_path, "w")
-	master_file.truncate()
-
-	# Writing the master inventory file
-	master_file.write("[sparknodes]\n")
-	master_file.write(cluster_info.keys()[0] +"\n")
-        slave_file_path = os.path.join(python_file_path +
-		                           "/VCL/AutoSpark/Ansible/playbooks/slave_inventory")
-
-	slave_file = open(slave_file_path, "w")
-	slave_file.truncate()
-
-	# Writing the slave inventory file
-	slave_file.write("[sparknodes]\n")
-	if len(cluster_info)>1:
-		for slave in range(1,len(cluster_info.keys())):
-		    slave_file.write(cluster_info.keys()[slave] +"\n")
-
-	master_file.close()
-	slave_file.close()
-
-    def create_shell_script(self, cluster_info):
-
-	    master = cluster_info.keys()[0]
-	    python_file_path = os.path.dirname(os.getcwd())
-
-	    # Master shell script
-	    shell_script_master_path = os.path.join(python_file_path +
-		                                    "/VCL/AutoSpark/Ansible/playbooks/master.sh")
-
-	    script_file_master = open(shell_script_master_path, "w")
-	    script_file_master.truncate()
-	    script_file_master.write("ansible-playbook -s --extra-vars ")
-	    script_file_master.write("\'MASTER_YES=\"true\" USER=\"ubuntu\" ")
-	    script_file_master.write("SPARK_URL=\"\" MASTER_IP=\"")
-	    script_file_master.write(master)
-	    script_file_master.write("\"\' sparkplaybook.yml -i master_inventory\n")
-
-	    # Slave shell script
-	    shell_script_slave_path = os.path.join(python_file_path +
-		                                   "/VCL/AutoSpark/Ansible/playbooks/slave.sh")
-	    if len(cluster_info)>1:
-		    script_file_slave = open(shell_script_slave_path, "w")
-		    script_file_slave.truncate()
-		    script_file_slave.write("ansible-playbook -s --extra-vars ")
-		    script_file_slave.write("\'MASTER_YES=\"false\" USER=\"ubuntu\" ")
-		    script_file_slave.write("SPARK_URL=\"spark://")
-		    script_file_slave.write(master + ":7077\" ")
-		    script_file_slave.write("MASTER_IP=\"\"")
-		    script_file_slave.write("\' sparkplaybook.yml -i slave_inventory\n")
