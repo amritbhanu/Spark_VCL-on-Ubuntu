@@ -55,6 +55,8 @@ def add(config, image_id, start, length, count,node_type, url, username, passwor
     if image_id is None:
         image_id = 3630
     click.echo("start:" + str(start))
+    click.echo("--node-type"+node_type)
+    click.echo("playbook "+playbook)
     if playbook:
         opsworks = vclopsworks.VCLOpsworks(config, image_id, start, length, count, node_type, playbook)
         opsworks.run()
