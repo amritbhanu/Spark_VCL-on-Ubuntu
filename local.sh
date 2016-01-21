@@ -13,5 +13,5 @@ do
 done < $dir/AutoSpark/Ansible/playbooks/master_inventory
 
 #ssh to 1 of the ips
-ssh aagrawa8@$val
+ssh -X aagrawa8@$val
 
