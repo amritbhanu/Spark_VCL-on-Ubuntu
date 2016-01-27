@@ -1,4 +1,15 @@
 ---
-employees:
-  -  martin: {name: Martin D'vloper, job: Developer, skill: Elite}
-fruits: ['Apple', 'Orange', 'Strawberry', 'Mango']
+- hosts: all
+  remote_user: root
+  sudo: true
+
+  tasks:
+   - name: Run apt-get update
+     apt: update_cache=yes
+
+   - name: Install wget
+     apt: pkg=wget state=installed update_cache=true
+
+   - name: Install JRE to set JAVA_HOME
+     sudo: true
+     apt: name=openjdk-7-jre state=present

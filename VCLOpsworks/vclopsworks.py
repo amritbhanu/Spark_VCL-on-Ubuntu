@@ -2,6 +2,7 @@ import logging
 import requests
 import time
 import os
+import subprocess
 from ansible.playbook import PlayBook
 from ansible.inventory import Inventory
 from ansible import callbacks
@@ -40,12 +41,17 @@ class VCLOpsworks(object):
                     "ansible_ssh_user": user,
                     "ansible_ssh_port": connect_port
                 }
+	command= "ssh-copy-id aagrawa8@"+server_ip
+	self.execute(command)
+        time.sleep(10)
         log.info("hosts {}".format(self.hosts))
         self.create_servers_file(self.hosts, self.node_type)
-
         if self.playbook:
             self.configure_hosts(self.hosts, self.playbook)
 
+    def execute(self, command):
+        print("Executing Command" + command)
+        subprocess.call(command, shell=True)
 
     def __wait_for_request_ready(self, request_id):
         log.info("checking request {} status".format(request_id))
