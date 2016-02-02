@@ -12,6 +12,7 @@ __pycache__/
 .Python
 env/
 build/
+AutoSpark/driver/node_modules/
 develop-eggs/
 ssh_keys/
 dist/
