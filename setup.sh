@@ -9,10 +9,7 @@ mkdir ssh_keys
 cp ~/.ssh/id_rsa ssh_keys/id_rsa
 cp ~/.ssh/id_rsa.pub ssh_keys/id_rsa.pub
 
-sudo apt-get update -y
-sudo apt-get install git
-
-cd VCL/AutoSpark/scripts
+cd AutoSpark/scripts
 sudo ./setup_machine.sh
 
 cd ../driver
