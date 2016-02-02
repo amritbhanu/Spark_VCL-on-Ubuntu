@@ -14,7 +14,8 @@ env/
 build/
 AutoSpark/driver/node_modules/
 develop-eggs/
-ssh_keys/
+ssh_keys/id_rsa
+ssh_keys/id_rsa.pub
 dist/
 downloads/
 eggs/
