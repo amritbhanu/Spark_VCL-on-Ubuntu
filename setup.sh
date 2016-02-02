@@ -16,7 +16,13 @@ cd AutoSpark/scripts
 sudo ./setup_machine.sh
 
 cd ../driver
-npm install
+
+if [ ! -d "node_modules" ]; then
+  npm install
+  # Control will enter here if $DIRECTORY doesn't exist.
+fi
+
+
 
 sudo sh -c "echo \"StrictHostKeyChecking no\" >> /etc/ssh/ssh_config"
 
