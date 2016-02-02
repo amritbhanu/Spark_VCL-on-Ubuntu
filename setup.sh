@@ -2,8 +2,6 @@
 python setup.py install
 echo $1 > user.txt
 
-cd VCL
-
 if [ ! -d "ssh_keys" ]; then
   ssh-keygen -t rsa
   mkdir ssh_keys
@@ -11,6 +9,8 @@ if [ ! -d "ssh_keys" ]; then
   cp ~/.ssh/id_rsa.pub ssh_keys/id_rsa.pub
   # Control will enter here if $DIRECTORY doesn't exist.
 fi
+sudo apt-get update -y
+sudo apt-get install git
 
 cd AutoSpark/scripts
 sudo ./setup_machine.sh
