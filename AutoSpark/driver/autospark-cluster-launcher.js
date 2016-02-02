@@ -73,8 +73,8 @@ function get_spark_cluster_params(provider) {
 
         name = result.name
 	count=result.count
-	if (!count):
-		count=1
+	if (!count){
+		count=1}
 
         if( name && count) {
 

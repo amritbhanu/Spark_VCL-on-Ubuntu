@@ -29,6 +29,7 @@ def launch(args):
     os.chdir(vcl_LAUNCHER_DIR)
 
     # Getting the IP Address of machine
+    print("here")
     ip_addr = socket.gethostbyname(socket.gethostname())
     print("IP Address: " + ip_addr)
 
@@ -46,7 +47,7 @@ def launch(args):
     # subprocess.call(command, shell=True)
 
     # Wait for instance to be ssh ready
-    print("Waiting for ec2 instances to be ready for ssh")
+    print("Waiting for vcl instances to be ready for ssh")
     time.sleep(250)
     
     # Move to ansible directory

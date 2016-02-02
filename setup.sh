@@ -15,6 +15,6 @@ sudo ./setup_machine.sh
 cd ../driver
 npm install
 
-sudo echo "StrictHostKeyChecking no" >> /etc/ssh/ssh_config
+sudo sh -c "echo \"StrictHostKeyChecking no\" >> /etc/ssh/ssh_config"
 
 node autospark-cluster-launcher.js'
