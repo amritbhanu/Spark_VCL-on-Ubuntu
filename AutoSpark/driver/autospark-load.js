@@ -7,7 +7,7 @@ var fs = require('fs')
 BASE_DIR = __dirname
 MASTER_INVENTORY = BASE_DIR + "/../Ansible/playbooks/master_inventory"
 SLAVE_INVENTORY = BASE_DIR + "/../Ansible/playbooks/slave_inventory"
-
+USER = BASE_DIR + "/../../user.txt"
 // Starting a new prompt
 prompt.start()
 
@@ -27,15 +27,14 @@ console.log('#########################################');
 console.log('##     Welcome to AutoSpark Data Load   ##');
 console.log('#########################################');
 console.log('\n')
-console.log('Enter provider: aws or digitalocean');
+console.log('Enter provider: vcl');
 console.log('\n')
 
-prompt.get(['provider', 'data_file_full_path','file_name_at_destination', 'ssh_private_key_path'], function (err, result) {
+prompt.get(['provider', 'data_file_full_path','file_name_at_destination'], function (err, result) {
 
     provider = result.provider
     data_file_full_path = result.data_file_full_path
     file_name_at_destination = result.file_name_at_destination
-    ssh_private_key_path = result.ssh_private_key_path
 
     if (data_file_full_path && file_name_at_destination) {
 
@@ -60,29 +59,20 @@ prompt.get(['provider', 'data_file_full_path','file_name_at_destination', 'ssh_p
                 nodes_array.push(slave_inv_parts[i].split(" ")[0])
             }
         }
-
-        console.log("Saving data to the below nodes ")
+        console.log(USER)
+	var user = fs.readFileSync(USER, 'utf-8').split('\n')[0];
+        console.log(user)
         console.log(nodes_array)
-        if(provider == 'aws'){
+        if(provider == 'vcl'){
 
                 for(var i=0; i < nodes_array.length; i++) {
 
                     ip_addr = nodes_array[i]
-                    cmd = "scp -i " + ssh_private_key_path + " "+ data_file_full_path + " ubuntu@" + ip_addr + ":/home/ubuntu/" + file_name_at_destination
+                    cmd = "scp -i " + data_file_full_path + " "+user+"@" + ip_addr + ":/home/"+user+"/" + file_name_at_destination
                     command_executor(cmd)
                 }
 
-        } else if (provider == 'digitalocean') {
-
-                for(var i=0; i < nodes_array.length; i++) {
-
-                    ip_addr = nodes_array[i]
-                    cmd = "scp -i " + ssh_private_key_path + " "+ data_file_full_path + " root@" + ip_addr + ":/root/" + file_name_at_destination
-                    command_executor(cmd)
-                }
-
-        }
-
+        } 
     }
 
 // Prompt ends
