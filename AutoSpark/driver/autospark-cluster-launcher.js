@@ -79,8 +79,8 @@ function get_spark_cluster_params(provider) {
         if( name && count) {
 
             // Delete all file data
-            cmd = 'python truncate.py'
-            command_executor(cmd)
+            //cmd = 'python truncate.py'
+            //command_executor(cmd)
 
 
                 if(provider === 'vcl') {

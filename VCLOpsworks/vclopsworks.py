@@ -60,7 +60,7 @@ class VCLOpsworks(object):
             self.configure_hosts(self.hosts, self.playbook)
 
     def execute(self, command):
-        print("Executing Command" + command)
+        print("Executing Command " + command)
         subprocess.call(command, shell=True)
 
     def __wait_for_request_ready(self, request_id):
@@ -105,9 +105,8 @@ class VCLOpsworks(object):
         pb.run()
 
     def create_servers_file(self, cluster_info, node_type):
-
+	python_file_path = os.path.dirname(os.getcwd())
 	if (node_type=='master'):
-		python_file_path = os.path.dirname(os.getcwd())
 
 		master_file_path = os.path.join(python_file_path +
 				                    "/VCL/AutoSpark/Ansible/playbooks/master_file")

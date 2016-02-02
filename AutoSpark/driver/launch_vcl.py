@@ -20,7 +20,7 @@ def install_packages(filename):
 
 
 def execute(command):
-    print("Executing Command" + command)
+    print("Executing Command " + command)
     subprocess.call(command, shell=True)
 
 
@@ -29,7 +29,6 @@ def launch(args):
     os.chdir(vcl_LAUNCHER_DIR)
 
     # Getting the IP Address of machine
-    print("here")
     ip_addr = socket.gethostbyname(socket.gethostname())
     print("IP Address: " + ip_addr)
 
@@ -38,9 +37,9 @@ def launch(args):
     key_name = ip_addr
     name = args[0]
     count = args[1]
-
+    print(os.getcwd())
     # Running python command
-    cmd_format = "python ec2_connector.py --name {0} --count {1} --key_name {2}"
+    cmd_format = "python "+vcl_LAUNCHER_DIR+"ec2_connector.py --name {0} --count {1} --key_name {2}"
     command = cmd_format.format(name, count, key_name)
 
     execute(command)
@@ -48,7 +47,7 @@ def launch(args):
 
     # Wait for instance to be ssh ready
     print("Waiting for vcl instances to be ready for ssh")
-    time.sleep(250)
+    time.sleep(2)
     
     # Move to ansible directory
     os.chdir(ANSIBLE_DIR)

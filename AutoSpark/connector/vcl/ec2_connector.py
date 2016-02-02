@@ -1,5 +1,6 @@
 #!/usr/bin/python
 
+import ec2_connector
 import getopt
 import settings
 import sys
@@ -9,6 +10,7 @@ import os
 import subprocess
 
 # Globals
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SSH_PUB_KEY_PATH = ""
 PUBLIC_SSH_KEY = settings.PUBLIC_SSH_KEY.encode('utf-8')
 cluster_structure = {"masters": [], "slaves": []}
@@ -17,19 +19,15 @@ slave_file_name = "slave_inventory"
 shell_script_master_name = "master.sh"
 shell_script_slave_name = "slave.sh"
 # User inputs constant for each run
-CLUSTER_NAME = "spark"
-COUNT = 3
-# KEY_NAME = "spark_cluster_manager"
-KEY_NAME = "ansible_key"
 KEY_PATH = "~/.ssh/id_rsa"
 SECURITY_GROUPS = ["spark_cluster"]
 IMAGE_ID = "ami-5189a661"
 vcl_LAUNCHER_DIR = BASE_DIR + "/../../../"
-Driver_DIR = BASE_DIR + "/AutoSpark/connector/vcl/"
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+Driver_DIR = BASE_DIR + "/../../driver/"
+user=''
 
 def execute(command):
-    print("Executing Command" + command)
+    print("Executing Command " + command)
     subprocess.call(command, shell=True)
 
 def create_connection():
@@ -131,7 +129,7 @@ def wait_for_public_ip(reservation):
 
 def create_inventory_file(key_name):
 
-	python_file_path = os.path.dirname(os.getcwd())
+	python_file_path = os.path.dirname(os.path.abspath(__file__))
 
 	master_file_path = os.path.join(python_file_path +
 		                            "/../../Ansible/playbooks/master_inventory")
@@ -173,7 +171,7 @@ def create_shell_script(key_name):
     script_file_master = open(shell_script_master_path, "w")
     script_file_master.truncate()
     script_file_master.write("ansible-playbook -s --extra-vars ")
-    script_file_master.write("\'MASTER_YES=\"true\" USER=\"ubuntu\" ")
+    script_file_master.write("\'MASTER_YES=\"true\" USER=\""+user+"\" ")
     script_file_master.write("SPARK_URL=\"\" MASTER_IP=\"")
     script_file_master.write(master)
     script_file_master.write("\"\' sparkplaybook.yml -i master_inventory\n")
@@ -187,7 +185,7 @@ def create_shell_script(key_name):
     script_file_slave = open(shell_script_slave_path, "w")
     script_file_slave.truncate()
     script_file_slave.write("ansible-playbook -s --extra-vars ")
-    script_file_slave.write("\'MASTER_YES=\"false\" USER=\"ubuntu\" ")
+    script_file_slave.write("\'MASTER_YES=\"false\" USER=\""+user+"\" ")
     script_file_slave.write("SPARK_URL=\"spark://")
     script_file_slave.write(key_name + ":7077\" ")
     script_file_slave.write("MASTER_IP=\"\"")
@@ -195,7 +193,10 @@ def create_shell_script(key_name):
 
 
 def main(argv):
-
+    print("here")
+    CLUSTER_NAME = "spark"
+    COUNT = 1
+    KEY_NAME = "abc"
     try:
         opts, args = getopt.getopt(argv, "",
                                    ["name=", "count=",
@@ -223,7 +224,7 @@ def main(argv):
     # Creating the cluster
     # Running python command
     os.chdir(vcl_LAUNCHER_DIR)
-    user=''
+
     with open("user.txt", 'r') as f:
     	    for doc in f.readlines():
 		try:
@@ -231,12 +232,12 @@ def main(argv):
 		except:
 		    pass    
     cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
-    command = cmd_format.format(count)
+    command = cmd_format.format(COUNT)
     execute(command)
-    os.chdir(Driver_DIR)
+    #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
-    print("Wait for 60 seconds ; instance ids to arrive...")
-    time.sleep(60)
+    print("Wait for 2 seconds ; instance ids to arrive...")
+    time.sleep(2)
 
     # Wait for public Ip to be assigned
     ##IPS will be generated for all those ips.
@@ -252,8 +253,9 @@ def main(argv):
     create_inventory_file(KEY_NAME)
 
     # Create shell script
-    create_shell_script(cluster_info)
+    create_shell_script(KEY_NAME)
 
 
 if __name__ == '__main__':
+    print("new")
     main(sys.argv[1:])
