@@ -7,34 +7,35 @@
     master_ip: "{{ MASTER_IP }}"
   user: "{{user}}"
 
-- name: Run apt-get update
-  apt: update_cache=yes
+  tasks
+  - name: Run apt-get update
+    apt: update_cache=yes
 
-- name: Install git
-  apt: pkg=git state=installed update_cache=true
+  - name: Install wget
+    apt: pkg=wget state=installed update_cache=true
 
-- name: cloning repo
-  command: git clone https://github.com/amritbhanu/VCL.git
+  - name: Install git
+    apt: pkg=git state=installed update_cache=true
 
-- name: Install wget
-  apt: pkg=wget state=installed update_cache=true
+  - name: cloning repo
+    command: git clone https://github.com/amritbhanu/VCL.git
 
-- name: create spark dir
-  file: path=/spark state=directory mode=0755
+  - name: create spark dir
+    file: path=/spark state=directory mode=0755
 
-- name: download sources
-  sudo: true
-  get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.4.1/spark-1.4.1-bin-hadoop2.6.tgz dest=/spark/
+  - name: download sources
+    sudo: true
+    get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.4.1/spark-1.4.1-bin-hadoop2.6.tgz dest=/spark/
 
-- name: Unarchive Spark download
-  sudo: true
-  unarchive: src=/spark/spark-1.4.1-bin-hadoop2.6.tgz dest=/spark copy=no
+  - name: Unarchive Spark download
+    sudo: true
+    unarchive: src=/spark/spark-1.4.1-bin-hadoop2.6.tgz dest=/spark copy=no
 
-- name: Move spark dir to spark_latest
-  sudo: true
-  command: mv /spark/spark-1.4.1-bin-hadoop2.6 /spark/spark_latest
+  - name: Move spark dir to spark_latest
+    sudo: true
+    command: mv /spark/spark-1.4.1-bin-hadoop2.6 /spark/spark_latest
 
-- name: Install JRE to set JAVA_HOME
-  sudo: true
-  apt: name=openjdk-7-jre state=present
+  - name: Install JRE to set JAVA_HOME
+    sudo: true
+    apt: name=openjdk-7-jre state=present
 
