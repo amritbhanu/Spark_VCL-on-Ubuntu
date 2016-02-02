@@ -24,5 +24,8 @@ done < $dir/AutoSpark/Ansible/playbooks/master_inventory
 #ssh to 1 of the ips
 #ssh -X $1@$val
 
+#distributed file system
+#Contact vcl IT help desk
+
 #Sending file to master node.
-scp /home/amrit/GITHUB/Enron/Datasets/SE/academia.txt $1@$val:/home/$1/academia
+#scp /home/amrit/GITHUB/Enron/Datasets/SE/academia.txt $1@$val:/home/$1/academia
