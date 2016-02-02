@@ -1,6 +1,7 @@
 #from the source directory.
 python setup.py install
 
+echo $1 > user.txt
 #ssh-keygen -t rsa
 #mkdir ssh_keys
 #cp ~/.ssh/id_rsa ssh_keys/id_rsa

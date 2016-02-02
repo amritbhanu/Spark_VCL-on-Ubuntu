@@ -13,7 +13,8 @@
 - name: Install git
   apt: pkg=git state=installed update_cache=true
 
-- git clone https://github.com/amritbhanu/VCL.git
+- name: cloning repo
+  command: git clone https://github.com/amritbhanu/VCL.git
 
 - name: Install wget
   apt: pkg=wget state=installed update_cache=true

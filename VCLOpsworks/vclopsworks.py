@@ -26,6 +26,15 @@ class VCLOpsworks(object):
         self.playbook = playbook
 
     def run(self):
+	python_file_path = os.path.dirname(os.getcwd())
+	user_file_path = os.path.join(python_file_path +
+				                    "/VCL/user.txt")
+	with open(user_file_path, 'r') as f:
+    	    for doc in f.readlines():
+		try:
+		    user=doc.strip()
+		except:
+		    pass 
         for response in self.config.api.add_request(image_id=self.image_id,
                                                     start=self.start,
                                                     length=self.length,
@@ -41,8 +50,8 @@ class VCLOpsworks(object):
                     "ansible_ssh_user": user,
                     "ansible_ssh_port": connect_port
                 }
-	command= "ssh-copy-id aagrawa8@"+server_ip
-	self.execute(command)
+		command= "ssh-copy-id " +user + "@"+server_ip
+		self.execute(command)
         time.sleep(2)
         log.info("sleeping for {} seconds".format(2))
         log.info("hosts {}".format(self.hosts))

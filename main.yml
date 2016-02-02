@@ -13,7 +13,8 @@
 	- name: Install git
 	apt: pkg=git state=installed update_cache=true
 
-	- git clone https://github.com/amritbhanu/VCL.git
+	- name: cloning repo
+	command: git clone https://github.com/amritbhanu/VCL.git
 
 	- name: create spark dir
   	file: path=/spark state=directory mode=0755
