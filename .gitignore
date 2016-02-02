@@ -13,7 +13,7 @@ __pycache__/
 env/
 build/
 develop-eggs/
-ssh-keys/
+ssh_keys/
 dist/
 downloads/
 eggs/
