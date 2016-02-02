@@ -236,8 +236,8 @@ def main(argv):
     execute(command)
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
-    print("Wait for 2 seconds ; instance ids to arrive...")
-    time.sleep(2)
+    print("Wait for 60 seconds ; instance ids to arrive...")
+    time.sleep(60)
 
     # Wait for public Ip to be assigned
     ##IPS will be generated for all those ips.

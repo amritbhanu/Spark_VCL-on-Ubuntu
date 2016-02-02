@@ -47,7 +47,7 @@ def launch(args):
 
     # Wait for instance to be ssh ready
     print("Waiting for vcl instances to be ready for ssh")
-    time.sleep(2)
+    time.sleep(100)
     
     # Move to ansible directory
     os.chdir(ANSIBLE_DIR)
