@@ -68,7 +68,7 @@ prompt.get(['provider', 'data_file_full_path','file_name_at_destination'], funct
                 for(var i=0; i < nodes_array.length; i++) {
 
                     ip_addr = nodes_array[i]
-                    cmd = "scp -i " + data_file_full_path + " "+user+"@" + ip_addr + ":/home/"+user+"/" + file_name_at_destination
+                    cmd = "scp " + data_file_full_path + " "+user+"@" + ip_addr + ":/home/"+user+"/" + file_name_at_destination
                     command_executor(cmd)
                 }
 
