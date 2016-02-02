@@ -43,7 +43,8 @@ class VCLOpsworks(object):
                 }
 	command= "ssh-copy-id aagrawa8@"+server_ip
 	self.execute(command)
-        time.sleep(10)
+        time.sleep(2)
+        log.info("sleeping for {} seconds".format(2))
         log.info("hosts {}".format(self.hosts))
         self.create_servers_file(self.hosts, self.node_type)
         if self.playbook:

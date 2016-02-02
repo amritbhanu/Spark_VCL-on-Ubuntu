@@ -1,6 +1,19 @@
 ---
+- hosts: sparknodes
+  vars:
+    master: "{{ MASTER_YES }}"
+    spark_url: "{{ SPARK_URL }}"
+    user: "{{ USER }}"
+    master_ip: "{{ MASTER_IP }}"
+  user: "{{user}}"
+
 - name: Run apt-get update
   apt: update_cache=yes
+
+- name: Install git
+  apt: pkg=git state=installed update_cache=true
+
+- git clone https://github.com/amritbhanu/VCL.git
 
 - name: Install wget
   apt: pkg=wget state=installed update_cache=true
