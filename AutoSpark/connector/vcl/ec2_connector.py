@@ -121,10 +121,8 @@ def check_ssh(conn, key_name, ssh_pub):
             raise
 
 
-def wait_for_public_ip(reservation):
-    for instance in reservation.instances:
-        while instance.update() != "running":
-            time.sleep(5)
+def wait_for_public_ip():
+    time.sleep(60)
 
 
 def create_inventory_file(key_name):
@@ -193,7 +191,7 @@ def create_shell_script(key_name):
 
 
 def main(argv):
-    print("here")
+
     CLUSTER_NAME = "spark"
     COUNT = 1
     KEY_NAME = "abc"
@@ -237,7 +235,7 @@ def main(argv):
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
     print("Wait for 60 seconds ; instance ids to arrive...")
-    time.sleep(60)
+    wait_for_public_ip()
 
     # Wait for public Ip to be assigned
     ##IPS will be generated for all those ips.
@@ -257,5 +255,4 @@ def main(argv):
 
 
 if __name__ == '__main__':
-    print("new")
     main(sys.argv[1:])

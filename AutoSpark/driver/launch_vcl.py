@@ -23,6 +23,8 @@ def execute(command):
     print("Executing Command " + command)
     subprocess.call(command, shell=True)
 
+def waiting():
+    time.sleep(100)
 
 def launch(args):
     # Moving to the vcl Launcher dir
@@ -47,7 +49,7 @@ def launch(args):
 
     # Wait for instance to be ssh ready
     print("Waiting for vcl instances to be ready for ssh")
-    time.sleep(100)
+    waiting()
     
     # Move to ansible directory
     os.chdir(ANSIBLE_DIR)
