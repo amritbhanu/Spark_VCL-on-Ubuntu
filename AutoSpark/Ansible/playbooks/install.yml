@@ -29,6 +29,7 @@
      command: git clone https://github.com/amritbhanu/VCL.git
 
    - name: create spark dir
+     sudo: true
      file: path=/spark state=directory mode=0755
 
    - name: download sources
