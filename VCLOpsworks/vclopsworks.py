@@ -52,12 +52,12 @@ class VCLOpsworks(object):
                 }
 		command= "ssh-copy-id " +user + "@"+server_ip
 		self.execute(command)
-		command= "cat ~/.ssh/id_rsa | ssh -X " + user + "@"+server_ip + "cat >> ~/.ssh/id_rsa"
+		'''command= "cat ~/.ssh/id_rsa | ssh -t -t " + user + "@"+server_ip + " \"cat >> ~/.ssh/id_rsa\""
 		self.execute(command)
-		command= "cat ~/.ssh/id_rsa.pub | ssh -X " + user + "@"+server_ip + "cat >> ~/.ssh/id_rsa.pub"
+		command= "cat ~/.ssh/id_rsa.pub | ssh -t -t " + user + "@"+server_ip + " \"cat >> ~/.ssh/id_rsa.pub\""
 		self.execute(command)
-		command= "ssh -X " + user + "@"+server_ip + "rm ~/.ssh/authorized_keys"
-		self.execute(command)
+		command= "ssh -t -t " + user + "@"+server_ip + " \"rm ~/.ssh/authorized_keys\""
+		self.execute(command)'''
         time.sleep(1)
         log.info("sleeping for {} seconds".format(2))
         log.info("hosts {}".format(self.hosts))

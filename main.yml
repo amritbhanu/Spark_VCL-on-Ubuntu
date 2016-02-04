@@ -1,11 +1,13 @@
 ---
 - hosts: all
   remote_user: root
+  vars:
+     contents: "abc"
 
   tasks:
    - name: Run apt-get update
      sudo: true
-     apt: update_cache=yes
+     apt: update_cache=yes 
 
    - name: Install python-matplotlib 
      sudo: true

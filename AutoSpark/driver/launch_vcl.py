@@ -39,7 +39,7 @@ def launch(args):
     key_name = ip_addr
     name = args[0]
     count = args[1]
-    print(os.getcwd())
+
     # Running python command
     cmd_format = "python "+vcl_LAUNCHER_DIR+"ec2_connector.py --name {0} --count {1} --key_name {2}"
     command = cmd_format.format(name, count, key_name)
