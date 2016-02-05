@@ -185,7 +185,7 @@ def create_shell_script(key_name):
     script_file_slave.write("ansible-playbook -s --extra-vars ")
     script_file_slave.write("\'MASTER_YES=\"false\" USER=\""+user+"\" ")
     script_file_slave.write("SPARK_URL=\"spark://")
-    script_file_slave.write(key_name + ":7077\" ")
+    script_file_slave.write(master + ":7077\" ")
     script_file_slave.write("MASTER_IP=\"\"")
     script_file_slave.write("\' sparkplaybook.yml -i slave_inventory\n")
 

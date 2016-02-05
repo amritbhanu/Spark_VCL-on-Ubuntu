@@ -1,5 +1,9 @@
 #from the source directory.
+sudo apt-get upgrade
+
 python setup.py install
+
+export ANSIBLE_HOST_KEY_CHECKING=False
 
 echo $1 > user.txt
 if [ ! -d "ssh_keys" ]; then

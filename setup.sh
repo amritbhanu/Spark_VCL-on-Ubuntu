@@ -1,6 +1,9 @@
 #from the source directory.
-python setup.py install
+sudo apt-get upgrade
+sudo python setup.py install
 echo $1 > user.txt
+
+export ANSIBLE_HOST_KEY_CHECKING=False
 
 sudo apt-get update -y
 sudo apt-get install git

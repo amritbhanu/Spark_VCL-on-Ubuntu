@@ -3,10 +3,11 @@ import requests
 import time
 import os
 import subprocess
-from ansible.playbook import PlayBook
+from ansible.playbook import Playbook
 from ansible.inventory import Inventory
-from ansible import callbacks
+from ansible import errors
 from ansible import utils
+from ansible import callbacks
 from ansible.inventory.group import Group
 from ansible.inventory.host import Host
 
@@ -103,7 +104,7 @@ class VCLOpsworks(object):
         stats = callbacks.AggregateStats()
         playbook_cb = callbacks.PlaybookCallbacks(verbose=utils.VERBOSITY)
         runner_cb = callbacks.PlaybookRunnerCallbacks(stats, verbose=utils.VERBOSITY)
-        pb = PlayBook(inventory=inven,
+        pb = Playbook(inventory=inven,
                       playbook=playbook,
                       stats=stats,
                       callbacks=playbook_cb,
