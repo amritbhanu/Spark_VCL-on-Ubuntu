@@ -1,5 +1,9 @@
 #from the source directory.
-sudo apt-get upgrade
+wget https://pypi.python.org/packages/source/a/ansible/ansible-1.9.4.tar.gz
+tar -xvf ansible-1.9.4.tar.gz
+cd ansible-1.9.4
+python setup.py install
+
 sudo python setup.py install
 echo $1 > user.txt
 
