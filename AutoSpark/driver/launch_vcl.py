@@ -56,7 +56,7 @@ def launch(args):
 
     # Setting the shell to ignore ssh check
     # subprocess.call("export ANSIBLE_HOST_KEY_CHECKING=False", shell=True)
-
+    '''
     print("Executing master.sh")
     cmd = "sudo ./master.sh"
     execute(cmd)
