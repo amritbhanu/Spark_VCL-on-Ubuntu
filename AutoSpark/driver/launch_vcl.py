@@ -24,7 +24,7 @@ def execute(command):
     subprocess.call(command, shell=True)
 
 def waiting():
-    time.sleep(100)
+    time.sleep(200)
 
 def launch(args):
     # Moving to the vcl Launcher dir

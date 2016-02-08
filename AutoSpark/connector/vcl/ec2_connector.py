@@ -122,7 +122,7 @@ def check_ssh(conn, key_name, ssh_pub):
 
 
 def wait_for_public_ip():
-    time.sleep(60)
+    time.sleep(150)
 
 
 def create_inventory_file(key_name):
@@ -234,7 +234,7 @@ def main(argv):
     execute(command)
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
-    print("Wait for 60 seconds ; instance ids to arrive...")
+    print("Wait for 150 seconds ; instance ids to arrive...")
     wait_for_public_ip()
 
     # Wait for public Ip to be assigned
