@@ -67,16 +67,20 @@ function get_spark_cluster_params(provider) {
     console.log('\n')
     console.log('Cluster Name - User selected name for cluster identification');
     console.log('No of slaves to be in the cluster');
+    console.log('Length for each node reservation ');
     console.log('\n')
 
-    prompt.get([ 'name', 'count'], function (err, result) {
+    prompt.get([ 'name', 'count', 'lengt'], function (err, result) {
 
         name = result.name
 	count=result.count
+	length=result.lengt
 	if (!count){
 		count=1}
+	if (!length){
+		length=60}
 
-        if( name && count) {
+        if( name && count && length) {
 
             // Delete all file data
             //cmd = 'python truncate.py'
@@ -88,7 +92,7 @@ function get_spark_cluster_params(provider) {
                     console.log ('Custom vcl')
                     
 
-                        cmd = 'python launch_vcl.py ' + name +' '+count;
+                        cmd = 'python launch_vcl.py ' + name +' '+count+' '+length;
                         command_executor(cmd)
 
                 }

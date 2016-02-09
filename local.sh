@@ -1,4 +1,5 @@
 #from the source directory.
+#1st parameter unity id, 2nd parameter length of reservation in mins.
 sudo apt-get upgrade
 
 python setup.py install
@@ -15,7 +16,7 @@ if [ ! -d "ssh_keys" ]; then
 fi
 
 #this will create 1 instance and we will install the packages and whatever is needed for that.
-vcl-opsworks request add --image-id 3630 --node-type master -c 1 --playbook main.yml "https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall" "$1@NCSU"
+vcl-opsworks request add --image-id 3630 --node-type master -c 1 -l $2 --playbook main.yml "https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall" "$1@NCSU"
 #it will return a connecting ip address, use that to do ssh.
 
 dir=$(pwd)

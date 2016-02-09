@@ -195,6 +195,7 @@ def main(argv):
     CLUSTER_NAME = "spark"
     COUNT = 1
     KEY_NAME = "abc"
+    LENGTH = 60
     try:
         opts, args = getopt.getopt(argv, "",
                                    ["name=", "count=",
@@ -219,6 +220,8 @@ def main(argv):
         if opt == "--key_name":
             KEY_NAME = arg
 
+        if opt == "--length":
+            LENGTH = arg
     # Creating the cluster
     # Running python command
     os.chdir(vcl_LAUNCHER_DIR)
@@ -229,8 +232,8 @@ def main(argv):
 		    user=doc.strip()
 		except:
 		    pass    
-    cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
-    command = cmd_format.format(COUNT)
+    cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} -l {1} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
+    command = cmd_format.format(COUNT, LENGTH)
     execute(command)
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
