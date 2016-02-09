@@ -165,7 +165,7 @@ def create_shell_script(key_name):
                                             "/../../Ansible/playbooks/",
                                             shell_script_master_name)
 
-    print("Info: Master script path " + shell_script_master_path)
+    #print("Info: Master script path " + shell_script_master_path)
     script_file_master = open(shell_script_master_path, "w")
     script_file_master.truncate()
     script_file_master.write("ansible-playbook -s --extra-vars ")
@@ -179,7 +179,7 @@ def create_shell_script(key_name):
                                            "/../../Ansible/playbooks/",
                                            shell_script_slave_name)
 
-    print("Info: Master script path " + shell_script_slave_path)
+    #print("Info: Master script path " + shell_script_slave_path)
     script_file_slave = open(shell_script_slave_path, "w")
     script_file_slave.truncate()
     script_file_slave.write("ansible-playbook -s --extra-vars ")
