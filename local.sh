@@ -23,7 +23,10 @@ val=1
 while read line           
 do           
      val=$"$line"           
-done < $dir/AutoSpark/Ansible/playbooks/master_inventory
+done < $dir/AutoSpark/Ansible/playbooks/master_file
+
+cat ~/.ssh/id_rsa.pub | ssh $1@$val "chmod 700 ~/.ssh; cat >> ~/.ssh/id_rsa.pub; chmod 600 ~/.ssh/id_rsa.pub; chmod 600 ~/.ssh/authorized_keys"
+cat ~/.ssh/id_rsa | ssh $1@$val "cat >> ~/.ssh/id_rsa; chmod 600 ~/.ssh/id_rsa"
 
 #ssh to 1 of the ips
 #ssh -X $1@$val

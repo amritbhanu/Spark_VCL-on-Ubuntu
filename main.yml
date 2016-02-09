@@ -13,9 +13,9 @@
      sudo: true
      apt: pkg=python-matplotlib state=installed update_cache=true
 
-   - name: Install wget
+   - name: Install python pip
      sudo: true
-     apt: pkg=wget state=installed update_cache=true
+     apt: pkg=python-pip state=installed update_cache=true
 
    - name: Install git
      sudo: true

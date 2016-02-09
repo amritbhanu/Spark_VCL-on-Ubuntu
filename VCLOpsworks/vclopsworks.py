@@ -117,11 +117,22 @@ class VCLOpsworks(object):
 
 		master_file_path = os.path.join(python_file_path +
 				                    "/VCL/AutoSpark/Ansible/playbooks/master_file")
-
 		master_file = open(master_file_path, "w")
 		master_file.truncate()
 		master_file.write(cluster_info.keys()[0] +"\n")
 		master_file.close()
+		'''if (cluster_info.keys()>1):
+			slave_file_path = os.path.join(python_file_path +
+				                   "/VCL/AutoSpark/Ansible/playbooks/slave_file")
+
+			slave_file = open(slave_file_path, "w")
+			slave_file.truncate()
+
+		# Writing the slave inventory file
+			for slave in range(1,len(cluster_info.keys())):
+				slave_file.write(cluster_info.keys()[slave] +"\n")
+
+			slave_file.close()'''
 	elif (node_type=='slave'):
 		slave_file_path = os.path.join(python_file_path +
 				                   "/VCL/AutoSpark/Ansible/playbooks/slave_file")
