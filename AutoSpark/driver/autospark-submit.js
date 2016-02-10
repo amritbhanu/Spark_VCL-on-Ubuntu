@@ -1,6 +1,7 @@
 var prompt= require('prompt');
 var exec = require('child_process').exec;
 var sys = require('sys')
+var fs = require('fs')
 
 // Getting the file directory
 BASE_DIR = __dirname
@@ -49,11 +50,11 @@ prompt.get(['provider','spark_master_ip', 'spark_context_url','spark_job_file_pa
     if (provider === 'vcl') {
 
         console.log("Copying the program to the remote spark master...")
-        cmd = "scp -i " + spark_job_file_path + " "+user+"@" + spark_master_ip + ":/home/"+user+"/" + job_name_at_destination
+        cmd = "scp " + spark_job_file_path + " "+user+"@" + spark_master_ip + ":/home/"+user+"/" + job_name_at_destination
         command_executor(cmd)
 
         console.log("Running spark job on master...")
-        cmd = "ssh -l "+user+ "@"+spark_master_ip + " 'sudo /spark/spark_latest/bin/spark-shell /home/"+user+"/"+ job_name_at_destination + " " + spark_context_url + " " + data_file_name + "'"
+        cmd = "ssh "+user+ "@"+spark_master_ip + " 'sudo /spark/spark_latest/bin/spark-shell /home/"+user+"/"+ job_name_at_destination + " " + spark_context_url + " " + data_file_name + "'"
         command_executor(cmd)
 
     }
