@@ -33,7 +33,6 @@ cat ~/.ssh/id_rsa | ssh $1@$val "cat >> ~/.ssh/id_rsa; chmod 600 ~/.ssh/id_rsa"
 #ssh -X $1@$val
 
 #distributed file system
-#Contact vcl IT help desk
 
 #Sending file to master node.
-#scp /home/amrit/GITHUB/Enron/Datasets/SE/academia.txt $1@$val:/home/$1/academia
+scp /home/amrit/GITHUB/Enron/Datasets/SE/jones.txt $1@$val:/home/$1/jones.txt

@@ -59,7 +59,6 @@ prompt.get(['provider', 'data_file_full_path','file_name_at_destination'], funct
                 nodes_array.push(slave_inv_parts[i].split(" ")[0])
             }
         }
-        console.log(USER)
 	var user = fs.readFileSync(USER, 'utf-8').split('\n')[0];
         console.log(user)
         console.log(nodes_array)

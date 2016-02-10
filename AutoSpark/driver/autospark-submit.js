@@ -4,6 +4,7 @@ var sys = require('sys')
 
 // Getting the file directory
 BASE_DIR = __dirname
+USER = BASE_DIR + "/../../user.txt"
 
 // Starting a new prompt
 prompt.start()
@@ -28,23 +29,31 @@ console.log('Enter provider: vcl');
 console.log('\n')
 
 prompt.get(['provider','spark_master_ip', 'spark_context_url','spark_job_file_path', 'job_name_at_destination', 'data_file_name'], function (err, result) {
-
+    
+    //vcl
     provider = result.provider
+    // just master ip
     spark_master_ip = result.spark_master_ip
+    // spark url which is master ip and its connecting ports
     spark_context_url = result.spark_context_url
+    // the running scala, or pyspark
     spark_job_file_path = result.spark_job_file_path
+    //just the spark python file
     job_name_at_destination = result.job_name_at_destination
+    //data file on which it wants to work with
     data_file_name = result.data_file_name
+
+    var user = fs.readFileSync(USER, 'utf-8').split('\n')[0];
 
     // Executing the spark job
     if (provider === 'vcl') {
 
         console.log("Copying the program to the remote spark master...")
-        cmd = "scp -i " + spark_job_file_path + " ubuntu@" + spark_master_ip + ":/home/ubuntu/" + job_name_at_destination
+        cmd = "scp -i " + spark_job_file_path + " "+user+"@" + spark_master_ip + ":/home/"+user+"/" + job_name_at_destination
         command_executor(cmd)
 
         console.log("Running spark job on master...")
-        cmd = "ssh -l ubuntu " + spark_master_ip + " 'sudo /spark/spark_latest/bin/pyspark /home/ubuntu/"+ job_name_at_destination + " " + spark_context_url + " " + data_file_name + "'"
+        cmd = "ssh -l "+user+ "@"+spark_master_ip + " 'sudo /spark/spark_latest/bin/pyspark /home/"+user+"/"+ job_name_at_destination + " " + spark_context_url + " " + data_file_name + "'"
         command_executor(cmd)
 
     }
