@@ -28,8 +28,8 @@ user=''
 
 def execute(command):
     print("Executing Command " + command)
-    proc = subprocess.call(command, shell=True)
-    proc.communicate()
+    proc = subprocess.Popen(command, shell=True)
+    proc.wait()
 
 def create_connection():
     #here again run the command of setting up vcl and launching the node.
@@ -156,7 +156,7 @@ def create_inventory_file(key_name):
 	slave_file.close()
 
 
-def create_shell_script(key_name):
+def create_shell_script(key_name, user=user):
 
     master = key_name
     python_file_path = os.path.dirname(os.path.abspath(__file__))
@@ -256,7 +256,7 @@ def main(argv):
     create_inventory_file(KEY_NAME)
 
     # Create shell script
-    create_shell_script(KEY_NAME)
+    create_shell_script(KEY_NAME, user)
 
 
 if __name__ == '__main__':

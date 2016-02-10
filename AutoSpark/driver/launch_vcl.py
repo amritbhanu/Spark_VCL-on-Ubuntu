@@ -21,8 +21,8 @@ def install_packages(filename):
 
 def execute(command):
     print("Executing Command " + command)
-    proc = subprocess.call(command, shell=True)
-    proc.communicate()
+    proc = subprocess.Popen(command, shell=True)
+    proc.wait()
 
 def waiting():
     time.sleep(200)
@@ -60,15 +60,15 @@ def launch(args):
     # Setting the shell to ignore ssh check
     # subprocess.call("export ANSIBLE_HOST_KEY_CHECKING=False", shell=True)
     
+    ##Both of them is working but we are in master node, so we dont need to install anything.
     print("Executing master.sh")
     cmd = "sudo ./master.sh"
-    execute(cmd)
-    # subprocess.call("sudo ./master.sh", shell=True)
+    #execute(cmd)
 
+    ## Here we have already installed packages using vcl-opsworks.
     print("Executing slave.sh")
     cmd = "sudo ./slave.sh"
-    execute(cmd)
-    # subprocess.call("sudo ./slave.sh", shell=True)'''
+    #execute(cmd)
 
 if __name__ == '__main__':
     sys.exit(launch(sys.argv[1:]))

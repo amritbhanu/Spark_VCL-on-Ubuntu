@@ -68,8 +68,8 @@ class VCLOpsworks(object):
 
     def execute(self, command):
         print("Executing Command " + command)
-        proc = subprocess.call(command, shell=True)
-        #proc.communicate()
+        proc = subprocess.Popen(command, shell=True)
+        proc.wait()
 
     def __wait_for_request_ready(self, request_id):
         log.info("checking request {} status".format(request_id))
