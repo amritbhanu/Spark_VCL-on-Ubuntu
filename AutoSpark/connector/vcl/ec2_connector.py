@@ -28,7 +28,8 @@ user=''
 
 def execute(command):
     print("Executing Command " + command)
-    subprocess.call(command, shell=True)
+    proc = subprocess.call(command, shell=True)
+    proc.communicate()
 
 def create_connection():
     #here again run the command of setting up vcl and launching the node.
@@ -232,13 +233,14 @@ def main(argv):
 		    user=doc.strip()
 		except:
 		    pass    
+    print("Wait for instance ids to arrive...")
     cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} -l {1} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
     command = cmd_format.format(COUNT, LENGTH)
     execute(command)
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
-    print("Wait for 150 seconds ; instance ids to arrive...")
-    wait_for_public_ip()
+    print("Instance ids arrived...")
+    #wait_for_public_ip()
 
     # Wait for public Ip to be assigned
     ##IPS will be generated for all those ips.

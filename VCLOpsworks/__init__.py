@@ -12,7 +12,8 @@ pass_config = click.make_pass_decorator(config.Config, ensure=True)
 
 def execute(command):
     print("Executing Command" + command)
-    subprocess.call(command, shell=True)
+    proc = subprocess.call(command, shell=True)
+    proc.communicate()
 
 def make_config(config, url, username, password):
     config.url = str(url).strip()

@@ -21,10 +21,11 @@ def install_packages(filename):
 
 def execute(command):
     print("Executing Command " + command)
-    subprocess.call(command, shell=True)
+    proc = subprocess.call(command, shell=True)
+    proc.communicate()
 
 def waiting():
-    time.sleep(200)
+    time.sleep(100)
 
 def launch(args):
     # Moving to the vcl Launcher dir
@@ -41,6 +42,7 @@ def launch(args):
     count = args[1]
     length = args[2]
 
+    print("Establishing vcl instances to be ready for ssh")
     # Running python command
     cmd_format = "python "+vcl_LAUNCHER_DIR+"ec2_connector.py --name {0} --count {1} --key_name {2} --length {3}"
     command = cmd_format.format(name, count, key_name, length)
@@ -50,7 +52,7 @@ def launch(args):
 
     # Wait for instance to be ssh ready
     print("Waiting for vcl instances to be ready for ssh")
-    waiting()
+    #waiting()
     
     # Move to ansible directory
     os.chdir(ANSIBLE_DIR)
