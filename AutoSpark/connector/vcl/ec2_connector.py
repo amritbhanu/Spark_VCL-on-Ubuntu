@@ -29,7 +29,7 @@ user=''
 def execute(command):
     print("Executing Command " + command)
     proc = subprocess.call(command, shell=True)
-    proc.communicate()
+    #proc.communicate()
 
 def create_connection():
     #here again run the command of setting up vcl and launching the node.
@@ -200,7 +200,7 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv, "",
                                    ["name=", "count=",
-                                    "key_name="])
+                                    "key_name=", "length="])
 
     except getopt.GetoptError:
         print("Incorrect Command line arguments")
@@ -222,7 +222,7 @@ def main(argv):
             KEY_NAME = arg
 
         if opt == "--length":
-            LENGTH = arg
+            LENGTH = int(arg)
     # Creating the cluster
     # Running python command
     os.chdir(vcl_LAUNCHER_DIR)
@@ -240,7 +240,7 @@ def main(argv):
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
     print("Instance ids arrived...")
-    #wait_for_public_ip()
+    wait_for_public_ip()
 
     # Wait for public Ip to be assigned
     ##IPS will be generated for all those ips.
