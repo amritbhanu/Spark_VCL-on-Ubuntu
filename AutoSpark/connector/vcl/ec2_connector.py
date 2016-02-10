@@ -29,7 +29,7 @@ user=''
 def execute(command):
     print("Executing Command " + command)
     proc = subprocess.call(command, shell=True)
-    #proc.communicate()
+    proc.communicate()
 
 def create_connection():
     #here again run the command of setting up vcl and launching the node.
@@ -240,7 +240,7 @@ def main(argv):
     #os.chdir(Driver_DIR)
     # Enforced wait for instance id to be assigned - Eventual consistency
     print("Instance ids arrived...")
-    wait_for_public_ip()
+    #wait_for_public_ip()
 
     # Wait for public Ip to be assigned
     ##IPS will be generated for all those ips.

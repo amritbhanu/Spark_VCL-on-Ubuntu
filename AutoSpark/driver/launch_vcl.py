@@ -22,7 +22,7 @@ def install_packages(filename):
 def execute(command):
     print("Executing Command " + command)
     proc = subprocess.call(command, shell=True)
-    #proc.communicate()
+    proc.communicate()
 
 def waiting():
     time.sleep(200)
@@ -52,14 +52,14 @@ def launch(args):
 
     # Wait for instance to be ssh ready
     print("Waiting for vcl instances to be ready for ssh")
-    waiting()
+    #waiting()
     
     # Move to ansible directory
     os.chdir(ANSIBLE_DIR)
 
     # Setting the shell to ignore ssh check
     # subprocess.call("export ANSIBLE_HOST_KEY_CHECKING=False", shell=True)
-    '''
+    
     print("Executing master.sh")
     cmd = "sudo ./master.sh"
     execute(cmd)
