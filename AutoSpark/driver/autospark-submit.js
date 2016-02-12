@@ -54,7 +54,7 @@ prompt.get(['provider','spark_master_ip', 'spark_context_url','spark_job_file_pa
         //command_executor(cmd)
 
         console.log("Running spark job on master...")
-        cmd = "ssh "+user+ "@"+spark_master_ip + " 'sudo /spark/spark_latest/bin/spark-submit --class lda.lda /home/"+user+"/"+ job_name_at_destination + " " + spark_context_url + " " + data_file_name + "'"
+        cmd = "ssh "+user+ "@"+spark_master_ip + " 'sudo /spark/spark_latest/bin/spark-submit --class lda.lda /home/"+user+"/"+ job_name_at_destination + " --master " + spark_context_url + " " + data_file_name + "'"
         command_executor(cmd)
 
     }
