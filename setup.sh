@@ -1,5 +1,9 @@
 #from the source directory.
-
+cp AutoSpark/Spark_Jobs/lda.zip ~
+cd ../
+unzip lda.zip
+rm lda.zip
+cd VCL
 wget https://pypi.python.org/packages/source/a/ansible/ansible-1.9.4.tar.gz
 tar -xvf ansible-1.9.4.tar.gz
 cd ansible-1.9.4

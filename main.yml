@@ -44,11 +44,3 @@
    - name: Install JRE to set JAVA_HOME
      sudo: true
      apt: name=openjdk-7-jre state=present
-
-   - name: Move spark job to home
-     sudo: true
-     command: mv ~/VCL/AutoSpark/Spark_Jobs/lda.zip ~
-
-   - name: Unarchive lda zip
-     sudo: true
-     unarchive: src=~/lda.zip dest=~ copy=no
