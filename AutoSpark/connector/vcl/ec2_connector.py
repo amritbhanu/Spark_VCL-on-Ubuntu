@@ -234,7 +234,7 @@ def main(argv):
 		except:
 		    pass    
     print("Wait for instance ids to arrive...")
-    cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} -l {1} --playbook main.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
+    cmd_format = "vcl-opsworks request add --image-id 3630 -n slave -c {0} -l {1} --playbook main1.yml \"https://vcl.ncsu.edu/scheduling/index.php?mode=xmlrpccall\" \""+user+"@NCSU\""
     command = cmd_format.format(COUNT, LENGTH)
     execute(command)
     #os.chdir(Driver_DIR)

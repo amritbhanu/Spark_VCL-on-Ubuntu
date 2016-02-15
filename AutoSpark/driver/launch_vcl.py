@@ -61,9 +61,9 @@ def launch(args):
     # subprocess.call("export ANSIBLE_HOST_KEY_CHECKING=False", shell=True)
     
     ##Both of them is working but we are in master node, so we dont need to install anything.
-    print("Executing master.sh")
+    #print("Executing master.sh")
     cmd = "sudo ./master.sh"
-    execute(cmd)
+    #execute(cmd)
 
     ## Here we have already installed packages using vcl-opsworks.
     print("Executing slave.sh")

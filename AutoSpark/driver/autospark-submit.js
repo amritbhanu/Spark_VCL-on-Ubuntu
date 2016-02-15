@@ -29,7 +29,7 @@ console.log('\n')
 console.log('Enter provider: vcl');
 console.log('\n')
 
-prompt.get(['provider','spark_master_ip', 'spark_context_url','spark_job_file_path', 'job_name_at_destination', 'data_file_name'], function (err, result) {
+prompt.get(['provider','spark_master_ip', 'spark_context_url', 'job_name_at_destination', 'data_file_name'], function (err, result) {
     
     //vcl
     provider = result.provider
@@ -38,7 +38,6 @@ prompt.get(['provider','spark_master_ip', 'spark_context_url','spark_job_file_pa
     // spark url which is master ip and its connecting ports
     spark_context_url = result.spark_context_url
     // the running scala, or pyspark
-    spark_job_file_path = result.spark_job_file_path
     //just the spark python file
     job_name_at_destination = result.job_name_at_destination
     //data file on which it wants to work with
