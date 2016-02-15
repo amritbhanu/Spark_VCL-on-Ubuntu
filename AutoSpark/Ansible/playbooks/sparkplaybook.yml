@@ -13,19 +13,19 @@
      apt: pkg=scala state=installed update_cache=true
 
    - name: create spark dir
-     file: path=/spark state=directory mode=0755
+     file: path=~/spark state=directory mode=0755
 
    - name: download sources
      sudo: true
-     get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz dest=/spark/
+     get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz dest=~/spark/
 
    - name: Unarchive Spark download
      sudo: true
-     unarchive: src=/spark/spark-1.6.0-bin-hadoop2.6.tgz dest=/spark copy=no
+     unarchive: src=~/spark/spark-1.6.0-bin-hadoop2.6.tgz dest=~/spark copy=no
 
    - name: Move spark dir to spark_latest
      sudo: true
-     command: mv /spark/spark-1.6.0-bin-hadoop2.6 /spark/spark_latest
+     command: mv ~/spark/spark-1.6.0-bin-hadoop2.6 ~/spark/spark_latest
 
    - name: Install JRE to set JAVA_HOME
      sudo: true
@@ -34,9 +34,9 @@
    - name: Start Spark Master
      sudo: true
      when: master=="true"
-     command: sh /spark/spark_latest/sbin/start-master.sh -h {{master_ip}}
+     command: sh ~/spark/spark_latest/sbin/start-master.sh -h {{master_ip}}
 
    - name: Start Spark Slaves
      sudo: true
      when: master=="false"
-     command: /spark/spark_latest/sbin/start-slave.sh {{spark_url}}
+     command: ~/spark/spark_latest/sbin/start-slave.sh {{spark_url}}
