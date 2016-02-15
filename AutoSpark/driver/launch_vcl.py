@@ -63,12 +63,12 @@ def launch(args):
     ##Both of them is working but we are in master node, so we dont need to install anything.
     print("Executing master.sh")
     cmd = "sudo ./master.sh"
-    #execute(cmd)
+    execute(cmd)
 
     ## Here we have already installed packages using vcl-opsworks.
     print("Executing slave.sh")
     cmd = "sudo ./slave.sh"
-    #execute(cmd)
+    execute(cmd)
 
 if __name__ == '__main__':
     sys.exit(launch(sys.argv[1:]))

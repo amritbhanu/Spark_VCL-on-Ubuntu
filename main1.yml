@@ -1,24 +1,21 @@
 ---
-- hosts: sparknodes
+- hosts: all
+  remote_user: root
   vars:
-    master: "{{ MASTER_YES }}"
-    spark_url: "{{ SPARK_URL }}"
-    user: "{{ USER }}"
-    master_ip: "{{ MASTER_IP }}"
-  user: "{{user}}"
+     contents: "abc"
 
   tasks:
    - name: Run apt-get update
      sudo: true
-     apt: update_cache=yes
+     apt: update_cache=yes 
 
-   - name: Install python-matplotlib 
+   - name: Install scala 
      sudo: true
-     apt: pkg=python-matplotlib state=installed update_cache=true
+     apt: pkg=scala state=installed update_cache=true
 
-   - name: Install wget
+   - name: Install python pip
      sudo: true
-     apt: pkg=wget state=installed update_cache=true
+     apt: pkg=python-pip state=installed update_cache=true
 
    - name: Install git
      sudo: true
@@ -34,17 +31,16 @@
 
    - name: download sources
      sudo: true
-     get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.4.1/spark-1.4.1-bin-hadoop2.6.tgz dest=/spark/
+     get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz dest=/spark/
 
    - name: Unarchive Spark download
      sudo: true
-     unarchive: src=/spark/spark-1.4.1-bin-hadoop2.6.tgz dest=/spark copy=no
+     unarchive: src=/spark/spark-1.6.0-bin-hadoop2.6.tgz dest=/spark copy=no
 
    - name: Move spark dir to spark_latest
      sudo: true
-     command: mv /spark/spark-1.4.1-bin-hadoop2.6 /spark/spark_latest
+     command: mv /spark/spark-1.6.0-bin-hadoop2.6 /spark/spark_latest
 
    - name: Install JRE to set JAVA_HOME
      sudo: true
      apt: name=openjdk-7-jre state=present
-
