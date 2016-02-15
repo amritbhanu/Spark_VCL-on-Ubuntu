@@ -13,27 +13,27 @@
      apt: pkg=scala state=installed update_cache=true
 
    - name: create spark dir
-     sudo: true
+     sudo: false
      file: path=/home/{{user}}/spark state=directory mode=0755
 
    - name: download sources
-     sudo: true
+     sudo: false
      get_url: url=http://ftp.wayne.edu/apache//spark/spark-1.6.0/spark-1.6.0-bin-hadoop2.6.tgz dest=/home/{{user}}/spark/
 
    - name: Unarchive Spark download
-     sudo: true
+     sudo: false
      unarchive: src=/home/{{user}}/spark/spark-1.6.0-bin-hadoop2.6.tgz dest=/home/{{user}}/spark copy=no
 
    - name: Move spark dir to spark_latest
-     sudo: true
+     sudo: false
      command: mv /home/{{user}}/spark/spark-1.6.0-bin-hadoop2.6 /home/{{user}}/spark/spark_latest
 
    - name: Start Spark Master
-     sudo: true
+     sudo: false
      when: master=="true"
      command: sh /home/{{user}}/spark/spark_latest/sbin/start-master.sh -h {{master_ip}}
 
    - name: Start Spark Slaves
-     sudo: true
+     sudo: false
      when: master=="false"
      command: /home/{{user}}/spark/spark_latest/sbin/start-slave.sh {{spark_url}}
