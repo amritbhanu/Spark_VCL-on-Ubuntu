@@ -13,7 +13,6 @@
      apt: pkg=scala state=installed update_cache=true
 
    - name: create spark dir
-     sudo: true
      file: path=/spark state=directory mode=0755
 
    - name: download sources
@@ -31,3 +30,13 @@
    - name: Install JRE to set JAVA_HOME
      sudo: true
      apt: name=openjdk-7-jre state=present
+
+   - name: Start Spark Master
+     sudo: true
+     when: master=="true"
+     command: sh /spark/spark_latest/sbin/start-master.sh -h {{master_ip}}
+
+   - name: Start Spark Slaves
+     sudo: true
+     when: master=="false"
+     command: /spark/spark_latest/sbin/start-slave.sh {{spark_url}}

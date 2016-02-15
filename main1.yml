@@ -1,8 +1,6 @@
 ---
 - hosts: all
-  remote_user: root
-  vars:
-     contents: "abc"
+  user: aagrawa8
 
   tasks:
    - name: Run apt-get update
