@@ -29,11 +29,11 @@
      command: mv /home/{{user}}/spark/spark-1.6.0-bin-hadoop2.6 /home/{{user}}/spark/spark_latest
 
    - name: Start Spark Master
-     sudo: false
+     sudo: true
      when: master=="true"
      command: sh /home/{{user}}/spark/spark_latest/sbin/start-master.sh -h {{master_ip}}
 
    - name: Start Spark Slaves
-     sudo: false
+     sudo: true
      when: master=="false"
      command: sh /home/{{user}}/spark/spark_latest/sbin/start-slave.sh {{spark_url}}
