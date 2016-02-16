@@ -142,7 +142,7 @@ def create_inventory_file(key_name):
 	# Writing the master inventory file
 	master_file.write("[sparknodes]\n")
 	master_file.write(key_name +"\n")
-	spark_slave(key_name +"\n")
+	spark_slave.write(key_name +"\n")
         slave_file_path = os.path.join(python_file_path +
 		                           "/../../Ansible/playbooks/slave_inventory")
 
@@ -153,7 +153,7 @@ def create_inventory_file(key_name):
     	    for doc in f.readlines():
 		try:
 		    slave_file.write(doc.strip() +"\n")
-		    spark_slave(doc.strip() +"\n")
+		    spark_slave.write(doc.strip() +"\n")
 		except:
 		    pass
 
