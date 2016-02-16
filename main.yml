@@ -19,7 +19,7 @@
 
    - name: cloning repo
      sudo: false
-     command: git clone https://github.com/amritbhanu/VCL.git
+     command: git clone https://github.com/amritbhanu/Spark_VCL-on-Ubuntu.git
 
    - name: Install scala 
      sudo: true

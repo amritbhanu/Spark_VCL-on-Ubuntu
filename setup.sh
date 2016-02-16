@@ -5,7 +5,7 @@ mv spark/spark_latest/conf/spark-env.sh.template spark/spark_latest/conf/spark-e
 touch spark/spark_latest/conf/slaves
 unzip lda.zip
 rm lda.zip
-cd VCL
+cd Spark_VCL-on-Ubuntu
 wget https://pypi.python.org/packages/source/a/ansible/ansible-1.9.4.tar.gz
 tar -xvf ansible-1.9.4.tar.gz
 cd ansible-1.9.4

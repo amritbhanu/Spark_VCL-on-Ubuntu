@@ -14,7 +14,7 @@ from ansible.inventory.host import Host
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
-class VCLOpsworks(object):
+class Spark_VCL-on-UbuntuOpsworks(object):
     def __init__(self, config, image_id, start, length, count, node_type, playbook):
         self.config = config
         self.image_id = image_id
@@ -29,7 +29,7 @@ class VCLOpsworks(object):
     def run(self):
 	python_file_path = os.path.dirname(os.getcwd())
 	user_file_path = os.path.join(python_file_path +
-				                    "/VCL/user.txt")
+				                    "/Spark_VCL-on-Ubuntu/user.txt")
 	with open(user_file_path, 'r') as f:
     	    for doc in f.readlines():
 		try:
@@ -117,14 +117,14 @@ class VCLOpsworks(object):
 	if (node_type=='master'):
 
 		master_file_path = os.path.join(python_file_path +
-				                    "/VCL/AutoSpark/Ansible/playbooks/master_file")
+				                    "/Spark_VCL-on-Ubuntu/AutoSpark/Ansible/playbooks/master_file")
 		master_file = open(master_file_path, "w")
 		master_file.truncate()
 		master_file.write(cluster_info.keys()[0] +"\n")
 		master_file.close()
 		'''if (cluster_info.keys()>1):
 			slave_file_path = os.path.join(python_file_path +
-				                   "/VCL/AutoSpark/Ansible/playbooks/slave_file")
+				                   "/Spark_VCL-on-Ubuntu/AutoSpark/Ansible/playbooks/slave_file")
 
 			slave_file = open(slave_file_path, "w")
 			slave_file.truncate()
@@ -136,7 +136,7 @@ class VCLOpsworks(object):
 			slave_file.close()'''
 	elif (node_type=='slave'):
 		slave_file_path = os.path.join(python_file_path +
-				                   "/VCL/AutoSpark/Ansible/playbooks/slave_file")
+				                   "/Spark_VCL-on-Ubuntu/AutoSpark/Ansible/playbooks/slave_file")
 
 		slave_file = open(slave_file_path, "w")
 		slave_file.truncate()
