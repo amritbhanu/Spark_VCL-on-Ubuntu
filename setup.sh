@@ -1,6 +1,7 @@
 #from the source directory.
 cp AutoSpark/Spark_Jobs/lda.zip ~
 cd ../
+mv spark/spark_latest/conf/spark-env.sh.template spark/spark_latest/conf/spark-env.sh
 unzip lda.zip
 rm lda.zip
 cd VCL

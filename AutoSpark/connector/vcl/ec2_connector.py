@@ -129,7 +129,10 @@ def wait_for_public_ip():
 def create_inventory_file(key_name):
 
 	python_file_path = os.path.dirname(os.path.abspath(__file__))
-
+	spark_file_path = os.path.join(python_file_path +
+		                            "/../../../../spark/spark_latest/conf/slaves")
+	spark_slave=open(spark_file_path, "w")
+	spark_slave.truncate()
 	master_file_path = os.path.join(python_file_path +
 		                            "/../../Ansible/playbooks/master_inventory")
 
@@ -139,6 +142,7 @@ def create_inventory_file(key_name):
 	# Writing the master inventory file
 	master_file.write("[sparknodes]\n")
 	master_file.write(key_name +"\n")
+	spark_slave(key_name +"\n")
         slave_file_path = os.path.join(python_file_path +
 		                           "/../../Ansible/playbooks/slave_inventory")
 
@@ -149,12 +153,13 @@ def create_inventory_file(key_name):
     	    for doc in f.readlines():
 		try:
 		    slave_file.write(doc.strip() +"\n")
+		    spark_slave(doc.strip() +"\n")
 		except:
 		    pass
 
 	master_file.close()
 	slave_file.close()
-
+	spark_slave.close()
 
 def create_shell_script(key_name, user=user):
 
@@ -252,7 +257,7 @@ def main(argv):
     #print_master_slave_setup(cluster_info)
 
     # Writing master / slave inventory files
-
+    # also writing slave nodes in the spark folder
     create_inventory_file(KEY_NAME)
 
     # Create shell script
