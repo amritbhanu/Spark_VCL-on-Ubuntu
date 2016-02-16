@@ -14,7 +14,7 @@ from ansible.inventory.host import Host
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger(__name__)
 
-class VCL(object):
+class VCLOpsworks(object):
     def __init__(self, config, image_id, start, length, count, node_type, playbook):
         self.config = config
         self.image_id = image_id
