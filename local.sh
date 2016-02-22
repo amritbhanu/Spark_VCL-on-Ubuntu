@@ -1,6 +1,6 @@
 #from the source directory.
 #1st parameter unity id, 2nd parameter length of reservation in mins.
-sudo apt-get upgrade -y
+sudo apt-get update -y
 sudo apt-get install python-pip -y
 sudo apt-get install python-dev -y
 sudo apt-get install libgmp3-dev -y
